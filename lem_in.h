@@ -1,0 +1,45 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lem_in.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/01 16:12:11 by Nik               #+#    #+#             */
+/*   Updated: 2019/11/03 01:22:42 by Nik              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef LEM_IN_H
+# define LEM_IN_H
+
+#include "queue/queue.h"
+#include "libft/libft.h"
+#include "file/file.h"
+
+typedef struct	l_links
+{
+	void *data;
+	struct l_links *next;
+}				t_links;
+
+
+typedef struct	l_room
+{
+	int is_start;
+	int is_end;
+	int num_of_ants;
+	int ant_name;
+	char *room_name;
+	struct l_room *next;
+	struct l_room *parent;
+	int x;
+	int y;
+	struct l_links *links;  // linked list of links
+}				t_room;
+
+t_room		*get_start(char *file_name);
+void		print_rooms(t_room *head);
+t_links		*find_path(t_room *start);
+
+#endif
