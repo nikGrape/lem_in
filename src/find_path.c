@@ -6,7 +6,7 @@
 /*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 23:45:38 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/04 00:47:23 by Nik              ###   ########.fr       */
+/*   Updated: 2019/11/04 14:07:00 by Nik              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,21 +61,32 @@ void	add_path_num(t_room *room, int num)
 		room->path_num = num;
 }
 
+t_links *new_path(void *data, int num, t_links *back)
+{
+	t_links *new;
+
+	new = (t_links*)malloc(sizeof(t_links));
+	new->data = data;
+	new->next = NULL;
+	new->back = back;
+	add_path_num(data, num);
+	return (new);
+}
+
 static t_links *get_path(t_room *end, t_room *start)
 {
 	t_links *path;
 	t_links *tmp;
 	static int path_num;
 
-	path = new_link(end);
-	add_path_num(path->data, path_num);
+	path = new_path(end, path_num, NULL);
+
 	tmp = path;
 	path_num++;
 	while (end != start)
 	{
 		end = end->parent;
-		tmp->next = new_link(end);
-		add_path_num(tmp->next->data, path_num);
+		tmp->next = new_path(end, path_num, tmp);
 		tmp = tmp->next;
 	}
 	return (path);

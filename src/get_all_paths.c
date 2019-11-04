@@ -6,30 +6,54 @@
 /*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 00:54:55 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/04 01:22:46 by Nik              ###   ########.fr       */
+/*   Updated: 2019/11/04 14:26:18 by Nik              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static void		add_path(t_links *path, t_links *new)
+int			path_len(t_links *path)
 {
+	int i;
 
-		while (path->next)
-			path = path->next;
-		path->next = new_link(new);
-
+	i = 0;
+	if (!path)
+		return (__INT_MAX__);
+	while ((path = path->next))
+		i++;
+	return (i);
 }
 
-t_links			*get_all_paths(t_room *start)
+t_paths *new_paths_enlem(t_links *data, int num)
 {
-	t_links *paths;
-	t_links *tmp;
+	t_paths *new;
 
-	paths = new_link(find_path(start));
+	new = (t_paths*)malloc(sizeof(t_paths));
+	new->path = data;
+	new->num = num;
+	new->len = path_len(data);
+	new->next = NULL;
+	return (new);
+}
+
+static void		add_path(t_paths *path, t_links *new, int num)
+{
+	while (path->next)
+		path = path->next;
+	path->next = new_paths_enlem(new, num);
+}
+
+t_paths			*get_all_paths(t_room *start)
+{
+	t_paths *paths;
+	t_links *tmp;
+	int		num;
+
+	num = 1;
+	paths = new_paths_enlem(rev_list(find_path(start)), num++);
 	while ((tmp = find_path(start)))
 	{
-		add_path(paths, tmp);
+		add_path(paths, rev_list(tmp), num++);
 	}
 	return (paths);
 }
