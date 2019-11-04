@@ -6,7 +6,7 @@
 /*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 16:12:11 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/03 01:22:42 by Nik              ###   ########.fr       */
+/*   Updated: 2019/11/03 21:40:40 by Nik              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,16 @@ typedef struct	l_room
 	struct l_links *links;  // linked list of links
 }				t_room;
 
-t_room		*get_start(char *file_name);
-void		print_rooms(t_room *head);
+t_room		*read_rooms(char *file_name);
 t_links		*find_path(t_room *start);
+void		get_links(char *line, int fd, t_room *head);
+
+t_links 	*new_link(void *data);
+int			is_comment(char *line);
+int			get_ants_number(int fd);
+void		add_ants_to_start(int num, t_room *head);
+	/*	temporary functions	 */
+void		print_rooms(t_room *head);
+void		print_path(t_links *path);
 
 #endif

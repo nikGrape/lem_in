@@ -6,23 +6,13 @@
 /*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 23:45:38 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/03 01:54:43 by Nik              ###   ########.fr       */
+/*   Updated: 2019/11/03 22:11:10 by Nik              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-t_links *new_link(void *data)
-{
-	t_links *new;
-
-	new = (t_links*)malloc(sizeof(t_links));
-	new->data = data;
-	new->next = NULL;
-	return (new);
-}
-
-int		is_checked(t_links *link, t_links *checked)
+static int		is_checked(t_links *link, t_links *checked)
 {
 	while (checked)
 	{
@@ -33,7 +23,7 @@ int		is_checked(t_links *link, t_links *checked)
 	return (0);
 }
 
-void	checked_add(t_links *link, t_links *checked)
+static void		checked_add(t_links *link, t_links *checked)
 {
 	if (!checked)
 	{
@@ -45,7 +35,7 @@ void	checked_add(t_links *link, t_links *checked)
 	checked->next = new_link(link->data);
 }
 
-void	add_all(t_room *tmp, t_queue **queue, t_links *checked)
+static void		add_all(t_room *tmp, t_queue **queue, t_links *checked)
 {
 	t_links *link;
 
@@ -62,16 +52,18 @@ void	add_all(t_room *tmp, t_queue **queue, t_links *checked)
 	}
 }
 
-t_links *get_path(t_room *tmp)
+static t_links *get_path(t_room *end, t_room *start)
 {
 	t_links *path;
+	t_links *tmp;
 
-	path = new_link(tmp);
-	while (tmp->parent->is_start == 0)
+	path = new_link(end);
+	tmp = path;
+	while (end != start)
 	{
-		tmp = tmp->parent;
-		path->next = new_link(tmp);
-		path = path->next;
+		end = end->parent;
+		tmp->next = new_link(end);
+		tmp = tmp->next;
 	}
 	return (path);
 }
@@ -80,7 +72,6 @@ t_links	*find_path(t_room *start)
 {
 	t_room	*tmp;
 	t_links *checked;
-	t_links *path;
 	t_queue *queue;
 	
 	checked = new_link(start);
@@ -88,17 +79,8 @@ t_links	*find_path(t_room *start)
 	while ((tmp = (t_room*)q_get(&queue)))
 	{
 		if (tmp->is_end)
-			break;
-		else
-			add_all(tmp, &queue, checked);
+			return (get_path(tmp, start));
+		add_all(tmp, &queue, checked);
 	}
-	while (tmp->is_start == 0)
-	{
-		ft_printf("%s<--", tmp->room_name);
-		tmp = tmp->parent;
-	}
-	ft_printf("%s", tmp->room_name);
-	ft_printf("\n\n");
-	// path = get_path(tmp);
-	return (path);
+	return (NULL);
 }

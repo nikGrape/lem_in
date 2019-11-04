@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   queue.h                                            :+:      :+:    :+:   */
+/*   q_del.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/24 17:17:09 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/03 20:23:10 by Nik              ###   ########.fr       */
+/*   Created: 2019/11/03 20:19:08 by Nik               #+#    #+#             */
+/*   Updated: 2019/11/03 20:22:23 by Nik              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef QUEUE_H
-# define QUEUE_H
+#include "queue.h"
 
-#include <stdlib.h>
-
-typedef struct	s_queue
+void	q_del(t_queue **queue)
 {
-	void *data;
-	struct s_queue *next;
-}				t_queue;
+	t_queue *tmp;
+	t_queue *lnext;
 
-t_queue			*q_new(void *data);
-void			*q_get(t_queue **queue);
-void			q_add(t_queue **queue, void *data);
-void			q_del(t_queue **queue);
-
-#endif
+	if (queue != NULL)
+	{
+		tmp = *queue;
+		lnext = *queue;
+		while (tmp != NULL)
+		{
+			free(tmp->data);
+			tmp = lnext->next;
+			free(lnext);
+			lnext = tmp;
+		}
+		*queue = NULL;
+	}
+}
