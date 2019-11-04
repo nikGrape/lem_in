@@ -6,7 +6,7 @@
 /*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 23:45:38 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/03 22:11:10 by Nik              ###   ########.fr       */
+/*   Updated: 2019/11/04 00:47:23 by Nik              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,25 +44,38 @@ static void		add_all(t_room *tmp, t_queue **queue, t_links *checked)
 	{
 		if (!is_checked(link, checked))
 		{
-			q_add(queue, link->data);
+			if ((((t_room*)link->data)->path_num) == 0)
+			{
+				q_add(queue, link->data);
+				((t_room*)link->data)->parent = tmp;
+			}
 			checked_add(link, checked);
-			((t_room*)link->data)->parent = tmp;
 		}
 		link = link->next;
 	}
+}
+
+void	add_path_num(t_room *room, int num)
+{
+	if (!room->is_end && !room->is_start)
+		room->path_num = num;
 }
 
 static t_links *get_path(t_room *end, t_room *start)
 {
 	t_links *path;
 	t_links *tmp;
+	static int path_num;
 
 	path = new_link(end);
+	add_path_num(path->data, path_num);
 	tmp = path;
+	path_num++;
 	while (end != start)
 	{
 		end = end->parent;
 		tmp->next = new_link(end);
+		add_path_num(tmp->next->data, path_num);
 		tmp = tmp->next;
 	}
 	return (path);

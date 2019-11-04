@@ -6,7 +6,7 @@
 /*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 16:50:38 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/03 22:26:14 by Nik              ###   ########.fr       */
+/*   Updated: 2019/11/04 01:19:10 by Nik              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,18 @@ t_room		*find_start(t_room *head)
 	return (NULL);
 }
 
+int			steps_count(t_links *path)
+{
+	int i;
+
+	i = 0;
+	if (!path)
+		return (__INT_MAX__);
+	while ((path = path->next))
+		i++;
+	return (i);
+}
+
 t_room		*find_room(t_room *head, char *name)
 {
 	while (!ft_strequ(head->room_name, name) && head->next)
@@ -30,17 +42,16 @@ t_room		*find_room(t_room *head, char *name)
 	return (head);
 }
 
+
+
 int			main(int argc, char **argv)
 {
-	if (argc < 2)
-		return (0);
 	t_room *head = read_rooms("text.txt");
 	t_room *start = find_start(head);
-	print_rooms(head);
+	t_links *paths = get_all_paths(start);
 	
-	t_room *room = find_room(head, argv[1]);
-
-	t_links *path = find_path(room);
-	print_path(path);
+	print_all_paths(paths);
+	
+	print_rooms(head);
 	// while(1);
 }
