@@ -6,7 +6,7 @@
 /*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 21:22:26 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/03 21:24:14 by Nik              ###   ########.fr       */
+/*   Updated: 2019/11/05 00:14:28 by Nik              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static void	add_link(t_room *room, t_room *new)
 {
 	t_links *tmp;
 
+	if (!room || !new || new->is_start)
+		return ;
 	if (!room->links)
 		room->links = new_link(new);
 	else

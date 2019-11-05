@@ -6,7 +6,7 @@
 /*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 22:14:12 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/04 15:01:23 by Nik              ###   ########.fr       */
+/*   Updated: 2019/11/05 00:38:06 by Nik              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	print_rooms(t_room *head)
 
 	while(head)
 	{
-		ft_printf("room - %s ant:%d: path:%d  ", head->room_name, head->ant_name, head->path_num);
+		ft_printf("room - %s ant:%d: ants#%d path:%d  ", head->room_name, head->ant_name, head->num_of_ants, head->path_num);
 		tmp = head->links;
 		i = 1;
 		while (tmp)
@@ -33,12 +33,9 @@ void	print_rooms(t_room *head)
 	}
 }
 
-void	print_step(t_ant *ant, int num_of_ants)
+void	print_step(t_ant *ant, int i)
 {
-	static int i;
-
-	if (!(i++ % num_of_ants))
-		ft_printf("\nstep:\n");
+	ft_printf("%s", i ? "\n" : "");
 	if (!ant->room->is_start)
 		ft_printf("L%d - %s ", ant->name, ant->room->room_name);
 }
