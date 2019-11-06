@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_rooms.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nikgrape <nikgrape@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 18:11:46 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/05 00:10:34 by Nik              ###   ########.fr       */
+/*   Updated: 2019/11/06 11:52:36 by nikgrape         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static t_room	*get_rooms(int fd)
 		tmp = tmp->next;
 		free(line);
 	}
-	get_links(line, fd, head);
+	read_links(line, fd, head);
 	return (head);
 }
 

@@ -1,35 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nikgrape <nikgrape@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/05 16:50:38 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/06 11:48:52 by nikgrape         ###   ########.fr       */
+/*   Created: 2019/11/02 22:14:12 by Nik               #+#    #+#             */
+/*   Updated: 2019/11/06 11:50:50 by nikgrape         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-t_room		*find_start(t_room *head)
+void	print_step(t_ant *ant, t_ant **tmp)
 {
-	while (head)
-	{
-		if (head->is_start)
-			return (head);
-		head = head->next;
-	}
-	return (NULL);
-}
-
-
-
-int			main(int argc, char **argv)
-{
-	t_room *head = read_rooms("text.txt");
-	t_room *start = find_start(head);
-	t_paths *paths = get_all_paths(start);
-	go(start, paths);
-	// clear(head, paths);
+	ft_printf("%s", (ant == *tmp) ? "\n" : "");
+	if (!ant->room->is_start)
+		ft_printf("L%d - %s ", ant->name, ant->room->room_name);
+	if (!*tmp)
+		*tmp = ant;
+	if (ant->room->is_end && *tmp == ant)
+		*tmp = NULL;
 }

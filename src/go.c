@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   go.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nikgrape <nikgrape@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 01:40:40 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/05 00:38:27 by Nik              ###   ########.fr       */
+/*   Updated: 2019/11/06 11:45:11 by nikgrape         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,32 +65,33 @@ void	next_step(t_ant *ant, t_paths *paths)
 	}
 }
 
-void	go(t_room *start, t_paths *paths)
+t_queue *create_ants_queue(t_room *start)
 {
 	t_queue	*queue;
-	t_ant	*ant;
 	int		name;
-	int i = 0;
-	int		total_ants = start->num_of_ants;
-
+	
 	name = 1;
 	queue = q_new(new_ant(name++, start));
 	while (name <= start->num_of_ants)
 		q_add(&queue, new_ant(name++, start));
-	t_ant *tmp = NULL;
+	return (queue);
+}
+
+void	go(t_room *start, t_paths *paths)
+{
+	t_queue	*queue;
+	t_ant	*ant;
+	t_ant	*tmp = NULL;
+
+	queue = create_ants_queue(start);
 	while ((ant = (t_ant*)q_get(&queue)))
 	{
 		next_step(ant, paths);
 		if (!ant->room->is_end)
 			q_add(&queue, ant);
-		print_step(ant, (tmp == ant) ? 1 : 0);
-		if (!tmp)
-			tmp = ant;
-		if (ant->room->is_end && tmp == ant)
-		{
+		print_step(ant, &tmp);
+		if (ant->room->is_end)
 			del_ant(ant);
-			tmp = NULL;
-		}
 	}
 	ft_printf("\n");
 }

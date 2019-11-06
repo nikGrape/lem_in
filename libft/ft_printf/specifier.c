@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   specifier.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vinograd <vinograd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nikgrape <nikgrape@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 00:55:21 by vinograd          #+#    #+#             */
-/*   Updated: 2019/07/30 14:03:18 by vinograd         ###   ########.fr       */
+/*   Updated: 2019/11/06 11:09:45 by nikgrape         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ char		*specifier(t_flag *flags, va_list *ap)
 	s = NULL;
 	if (flags->spcf == 's' || flags->spcf == 'c')
 		s = hendler_s_c(flags, ap);
-	else if (flags->spcf == 'd' || flags->spcf == 'i' |\
+	else if (flags->spcf == 'd' || flags->spcf == 'i' ||\
 	flags->spcf == 'u' || flags->spcf == 'U')
 		s = hendler_d_i_u(*flags, ap);
 	else if (flags->spcf == 'X' || flags->spcf == 'x' || flags->spcf == 'f')

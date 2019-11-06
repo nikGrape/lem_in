@@ -1,16 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.c                                            :+:      :+:    :+:   */
+/*   tmp_func.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nikgrape <nikgrape@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/02 22:14:12 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/05 00:38:06 by Nik              ###   ########.fr       */
+/*   Created: 2019/11/06 11:49:15 by nikgrape          #+#    #+#             */
+/*   Updated: 2019/11/06 11:50:38 by nikgrape         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+
+t_room		*find_room(t_room *head, char *name)
+{
+	while (!ft_strequ(head->room_name, name) && head->next)
+		head = head->next;
+	return (head);
+}
 
 void	print_rooms(t_room *head)
 {
@@ -31,13 +38,6 @@ void	print_rooms(t_room *head)
 		ft_printf("null\n");
 		head = head->next;
 	}
-}
-
-void	print_step(t_ant *ant, int i)
-{
-	ft_printf("%s", i ? "\n" : "");
-	if (!ant->room->is_start)
-		ft_printf("L%d - %s ", ant->name, ant->room->room_name);
 }
 
 void	print_path(t_links *path)

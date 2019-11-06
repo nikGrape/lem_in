@@ -3,3 +3,4 @@
 .vscode/
 a.out
 a.out.dSYM/
+libft/libft.a

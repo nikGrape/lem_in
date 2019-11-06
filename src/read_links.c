@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_links.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nikgrape <nikgrape@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 21:22:26 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/05 00:14:28 by Nik              ###   ########.fr       */
+/*   Updated: 2019/11/06 11:52:08 by nikgrape         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	make_link(char *name1, char *name2, t_room *head)
 	add_link(link2, link1);
 }
 
-void		get_links(char *line, int fd, t_room *head)
+void		read_links(char *line, int fd, t_room *head)
 {
 	char **data;
 
