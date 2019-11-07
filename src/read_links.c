@@ -6,7 +6,7 @@
 /*   By: nikgrape <nikgrape@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 21:22:26 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/06 11:52:08 by nikgrape         ###   ########.fr       */
+/*   Updated: 2019/11/07 00:10:57 by nikgrape         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,14 @@ static void	make_link(char *name1, char *name2, t_room *head)
 	add_link(link2, link1);
 }
 
-void		read_links(char *line, int fd, t_room *head)
+void		read_links(char *line, t_room *head)
 {
 	char **data;
 
 	data = ft_strsplit(line, '-');
 	make_link(data[0], data[1], head);
 	ft_arrayfree(data);
-	while (get_next_line(fd, &line))
+	while (get_next_line(0, &line))
 	{
 		if (is_comment(line))
 			continue ;

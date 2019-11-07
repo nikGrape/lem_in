@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   get_ants_number.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nikgrape <nikgrape@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 21:34:22 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/03 21:39:47 by Nik              ###   ########.fr       */
+/*   Updated: 2019/11/07 00:10:30 by nikgrape         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int		get_ants_number(int fd)
+int		get_ants_number()
 {
 	int ants;
 	char *line;
 
-	get_next_line(fd, &line);
+	get_next_line(0, &line);
 	ants = ft_atoi(line);
 	free(line);
 	return (ants);

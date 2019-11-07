@@ -6,7 +6,7 @@
 /*   By: nikgrape <nikgrape@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 16:12:11 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/06 11:57:05 by nikgrape         ###   ########.fr       */
+/*   Updated: 2019/11/07 00:45:02 by nikgrape         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,10 @@ typedef struct		l_ant
 	t_links			*path;
 }					t_ant;
 
+int  fd;
 
-t_room				*read_rooms(char *file_name);
-void				read_links(char *line, int fd, t_room *head);
+t_room				*read_rooms();
+void				read_links(char *line, t_room *head);
 t_paths				*get_all_paths(t_room *start);
 t_links				*find_path(t_room *start);
 
@@ -64,11 +65,12 @@ void				go(t_room *start, t_paths *paths);
 void				print_step(t_ant *ant, t_ant **tmp);
 
 int					is_comment(char *line);
-int					get_ants_number(int fd);
+int					get_ants_number();
 void				add_ants_to_start(int num, t_room *head);
 t_links 			*new_link(void *data);
 t_links				*rev_list(t_links *path);
 
+void				clear(t_paths *paths, t_room *rooms);
 
 	/*	temporary functions	 */
 void				print_rooms(t_room *head);

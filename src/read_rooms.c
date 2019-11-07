@@ -6,7 +6,7 @@
 /*   By: nikgrape <nikgrape@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 18:11:46 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/06 11:52:36 by nikgrape         ###   ########.fr       */
+/*   Updated: 2019/11/07 00:11:20 by nikgrape         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int		start_end(char *line, t_room *new)
 	return (1);
 }
 
-static t_room	*new_room(int fd, char *line)
+static t_room	*new_room(char *line)
 {
 	t_room *new;
 	char **data;
@@ -44,7 +44,7 @@ static t_room	*new_room(int fd, char *line)
 	new = (t_room*)malloc(sizeof(t_room));
 	set_zero(new);
 	if (start_end(line, new))
-		get_next_line(fd, &line);
+		get_next_line(0, &line);
 	data = ft_strsplit(line, ' ');
 	new->room_name = ft_strdup(data[0]);
 	new->y = ft_atoi(data[1]);
@@ -53,40 +53,36 @@ static t_room	*new_room(int fd, char *line)
 	return (new);
 }
 
-static t_room	*get_rooms(int fd)
+static t_room	*get_rooms()
 {
 	t_room	*head;
 	t_room	*tmp;
 	char	*line;
 
-	get_next_line(fd, &line);
-	head = new_room(fd, line);
+	get_next_line(0, &line);
+	head = new_room(line);
 	tmp = head;
-	while (get_next_line(fd, &line))
+	while (get_next_line(0, &line))
 	{
 		if (is_comment(line))
 			continue ;
 		if (ft_strchr(line, '-'))
 			break ;
-		tmp->next = new_room(fd, line);
+		tmp->next = new_room(line);
 		tmp = tmp->next;
 		free(line);
 	}
-	read_links(line, fd, head);
+	read_links(line, head);
 	return (head);
 }
 
-t_room	*read_rooms(char *file_name)
+t_room	*read_rooms()
 {
 	t_room	*new;
 	int		number_of_ants;
-	int		fd;
 
-	if ((fd = open(file_name, O_RDONLY, 0)) < 0)
-		return (NULL);
-	number_of_ants = get_ants_number(fd);
-	new = get_rooms(fd);
+	number_of_ants = get_ants_number();
+	new = get_rooms();
 	add_ants_to_start(number_of_ants, new);
-	close(fd);
 	return (new);
 }

@@ -6,7 +6,7 @@
 /*   By: nikgrape <nikgrape@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 11:49:15 by nikgrape          #+#    #+#             */
-/*   Updated: 2019/11/06 11:50:38 by nikgrape         ###   ########.fr       */
+/*   Updated: 2019/11/07 00:03:42 by nikgrape         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	print_path(t_links *path)
 	}
 	ft_printf("\n");
 }
-
 
 void	rev_print_path(t_links *path)
 {
