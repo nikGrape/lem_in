@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_links.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nikgrape <nikgrape@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 21:22:26 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/07 00:10:57 by nikgrape         ###   ########.fr       */
+/*   Updated: 2019/11/07 21:10:37 by Nik              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void		read_links(char *line, t_room *head)
 	data = ft_strsplit(line, '-');
 	make_link(data[0], data[1], head);
 	ft_arrayfree(data);
-	while (get_next_line(0, &line))
+	while (get_next_line(FD, &line))
 	{
 		if (is_comment(line))
 			continue ;

@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_step.c                                       :+:      :+:    :+:   */
+/*   visual.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/02 22:14:12 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/07 21:04:19 by Nik              ###   ########.fr       */
+/*   Created: 2019/11/07 17:49:53 by Nik               #+#    #+#             */
+/*   Updated: 2019/11/07 21:44:59 by Nik              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
 
-void	print_step(t_ant *ant, t_ant **tmp)
-{
-	ft_printf("%s", (ant == *tmp) ? "\n" : "");
-	if (!ant->room->is_start)
-		ft_printf("L%d - %s ", ant->name, ant->room->room_name);
-	if (!*tmp)
-		*tmp = ant;
-	if (ant->room->is_end && *tmp == ant)
-		*tmp = NULL;
-}
+#ifndef VISUAL_H
+# define VISUAL_H
+
+#include "../libft/libft.h"
+#include "../src/lem_in.h"
+# include "minilibx_macos/mlx.h"
+
+t_queue *create_ants_queue(t_room *start);
+void	next_step(t_ant *ant, t_paths *paths);
+t_ant	*new_ant(int name, t_room *start);
+char	*visual_go(t_room *start, t_paths *paths);
+
+#endif

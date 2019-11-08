@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_comment.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nikgrape <nikgrape@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 21:23:18 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/06 11:14:56 by nikgrape         ###   ########.fr       */
+/*   Updated: 2019/11/07 19:55:11 by Nik              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int		is_comment(char *line)
 {
 	if (line[0] == '#' && line[1] != '#')
 	{
+		ft_printf("%s\n", line);
 		free(line);
 		return (1);
 	}

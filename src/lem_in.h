@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nikgrape <nikgrape@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 16:12:11 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/07 00:45:02 by nikgrape         ###   ########.fr       */
+/*   Updated: 2019/11/07 21:11:57 by Nik              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 #include "../queue/queue.h"
 #include "../libft/libft.h"
+
+#define FD 3
 
 typedef struct		l_links
 {
@@ -77,5 +79,8 @@ void				print_rooms(t_room *head);
 void				print_path(t_links *path);
 void				print_all_paths(t_paths *paths);
 t_room				*find_room(t_room *head, char *name);
+
+	/*			bonus			 */
+void	visual(t_room *head, t_room *start, t_paths *paths);
 
 #endif

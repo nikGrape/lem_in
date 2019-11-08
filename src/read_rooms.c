@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_rooms.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nikgrape <nikgrape@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 18:11:46 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/07 00:11:20 by nikgrape         ###   ########.fr       */
+/*   Updated: 2019/11/07 22:32:59 by Nik              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int		start_end(char *line, t_room *new)
 		new->is_start = 1;
 	else if (ft_strstr(line, "##end"))
 		new->is_end = 1;
-	if (new->is_start || new->is_end)
+	if (new->is_start || new->is_end || ft_strnstr(line, "##", 2))
 		free(line);
 	else
 		return (0);
@@ -44,7 +44,7 @@ static t_room	*new_room(char *line)
 	new = (t_room*)malloc(sizeof(t_room));
 	set_zero(new);
 	if (start_end(line, new))
-		get_next_line(0, &line);
+		get_next_line(FD, &line);
 	data = ft_strsplit(line, ' ');
 	new->room_name = ft_strdup(data[0]);
 	new->y = ft_atoi(data[1]);
@@ -59,10 +59,10 @@ static t_room	*get_rooms()
 	t_room	*tmp;
 	char	*line;
 
-	get_next_line(0, &line);
+	get_next_line(FD, &line);
 	head = new_room(line);
 	tmp = head;
-	while (get_next_line(0, &line))
+	while (get_next_line(FD, &line))
 	{
 		if (is_comment(line))
 			continue ;
@@ -70,7 +70,7 @@ static t_room	*get_rooms()
 			break ;
 		tmp->next = new_room(line);
 		tmp = tmp->next;
-		free(line);
+		// free(line);
 	}
 	read_links(line, head);
 	return (head);
