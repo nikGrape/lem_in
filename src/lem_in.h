@@ -6,7 +6,7 @@
 /*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 16:12:11 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/07 21:11:57 by Nik              ###   ########.fr       */
+/*   Updated: 2019/11/08 00:59:29 by Nik              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "../queue/queue.h"
 #include "../libft/libft.h"
 
-#define FD 3
+#define FD 0
 
 typedef struct		l_links
 {
