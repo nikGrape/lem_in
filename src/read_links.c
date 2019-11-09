@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   read_links.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: vinograd <vinograd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 21:22:26 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/07 21:10:37 by Nik              ###   ########.fr       */
+/*   Updated: 2019/11/08 15:49:44 by vinograd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static void	add_link(t_room *room, t_room *new)
+static void		add_link(t_room *room, t_room *new)
 {
 	t_links *tmp;
 
@@ -29,7 +29,7 @@ static void	add_link(t_room *room, t_room *new)
 	}
 }
 
-static void	make_link(char *name1, char *name2, t_room *head)
+static void		make_link(char *name1, char *name2, t_room *head)
 {
 	t_room *link1;
 	t_room *link2;
@@ -48,7 +48,7 @@ static void	make_link(char *name1, char *name2, t_room *head)
 	add_link(link2, link1);
 }
 
-void		read_links(char *line, t_room *head)
+void			read_links(char *line, t_room *head)
 {
 	char **data;
 

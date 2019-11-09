@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: vinograd <vinograd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 23:45:38 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/04 14:07:00 by Nik              ###   ########.fr       */
+/*   Updated: 2019/11/08 15:46:15 by vinograd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,13 @@ static void		add_all(t_room *tmp, t_queue **queue, t_links *checked)
 	}
 }
 
-void	add_path_num(t_room *room, int num)
+static void		add_path_num(t_room *room, int num)
 {
 	if (!room->is_end && !room->is_start)
 		room->path_num = num;
 }
 
-t_links *new_path(void *data, int num, t_links *back)
+static t_links	*new_path(void *data, int num, t_links *back)
 {
 	t_links *new;
 
@@ -73,14 +73,13 @@ t_links *new_path(void *data, int num, t_links *back)
 	return (new);
 }
 
-static t_links *get_path(t_room *end, t_room *start)
+static t_links	*get_path(t_room *end, t_room *start)
 {
-	t_links *path;
-	t_links *tmp;
-	static int path_num;
+	t_links		*path;
+	t_links		*tmp;
+	static int	path_num;
 
 	path = new_path(end, path_num, NULL);
-
 	tmp = path;
 	path_num++;
 	while (end != start)
@@ -92,12 +91,12 @@ static t_links *get_path(t_room *end, t_room *start)
 	return (path);
 }
 
-t_links	*find_path(t_room *start)
+t_links			*find_path(t_room *start)
 {
 	t_room	*tmp;
 	t_links *checked;
 	t_queue *queue;
-	
+
 	checked = new_link(start);
 	queue = q_new(start);
 	while ((tmp = (t_room*)q_get(&queue)))

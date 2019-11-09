@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_all_paths.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nikgrape <nikgrape@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vinograd <vinograd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 00:54:55 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/06 11:14:25 by nikgrape         ###   ########.fr       */
+/*   Updated: 2019/11/08 15:46:59 by vinograd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int			path_len(t_links *path)
+static int		path_len(t_links *path)
 {
 	int i;
 
@@ -24,7 +24,7 @@ int			path_len(t_links *path)
 	return (i);
 }
 
-t_paths *new_paths_enlem(t_links *data, int num)
+static t_paths	*new_paths_enlem(t_links *data, int num)
 {
 	t_paths *new;
 

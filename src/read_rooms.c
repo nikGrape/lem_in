@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_rooms.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: vinograd <vinograd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 18:11:46 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/08 00:46:21 by Nik              ###   ########.fr       */
+/*   Updated: 2019/11/08 15:50:33 by vinograd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ static int		start_end(char *line, t_room *new)
 
 static t_room	*new_room(char *line)
 {
-	t_room *new;
-	char **data;
-	
+	t_room	*new;
+	char	**data;
+
 	new = (t_room*)malloc(sizeof(t_room));
 	set_zero(new);
 	if (start_end(line, new))
@@ -53,7 +53,7 @@ static t_room	*new_room(char *line)
 	return (new);
 }
 
-static t_room	*get_rooms()
+static t_room	*get_rooms(void)
 {
 	t_room	*head;
 	t_room	*tmp;
@@ -76,7 +76,7 @@ static t_room	*get_rooms()
 	return (head);
 }
 
-t_room	*read_rooms()
+t_room			*read_rooms(void)
 {
 	t_room	*new;
 	int		number_of_ants;

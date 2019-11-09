@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clear.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nikgrape <nikgrape@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vinograd <vinograd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 00:31:30 by nikgrape          #+#    #+#             */
-/*   Updated: 2019/11/07 00:44:14 by nikgrape         ###   ########.fr       */
+/*   Updated: 2019/11/08 15:44:47 by vinograd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	clear_rooms(t_room *rooms)
 		rooms = rooms->next;
 		free(tmp);
 	}
-	
 }
 
 void	clear(t_paths *paths, t_room *rooms)

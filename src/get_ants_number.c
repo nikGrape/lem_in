@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   get_ants_number.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: vinograd <vinograd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 21:34:22 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/07 21:14:46 by Nik              ###   ########.fr       */
+/*   Updated: 2019/11/08 15:47:37 by vinograd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int		get_ants_number()
+int		get_ants_number(void)
 {
-	int ants;
-	char *line;
+	int		ants;
+	char	*line;
 
 	get_next_line(FD, &line);
 	ants = ft_atoi(line);

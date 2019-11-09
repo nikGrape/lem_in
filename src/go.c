@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   go.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: vinograd <vinograd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 01:40:40 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/07 20:59:24 by Nik              ###   ########.fr       */
+/*   Updated: 2019/11/08 15:53:24 by vinograd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void	del_ant(t_ant *ant)
+void		del_ant(t_ant *ant)
 {
 	free(ant);
 }
 
-t_ant	*new_ant(int name, t_room *start)
+t_ant		*new_ant(int name, t_room *start)
 {
 	t_ant *new;
 
@@ -28,7 +28,7 @@ t_ant	*new_ant(int name, t_room *start)
 	return (new);
 }
 
-t_paths	*find_free_path(t_paths *paths) 
+t_paths		*find_free_path(t_paths *paths)
 {
 	while (paths)
 	{
@@ -39,10 +39,10 @@ t_paths	*find_free_path(t_paths *paths)
 	return (NULL);
 }
 
-t_links *choose_path(t_paths *paths, int num_of_ants_in_start)
+t_links		*choose_path(t_paths *paths, int num_of_ants_in_start)
 {
 	t_paths *path;
-	
+
 	if (!(path = find_free_path(paths)))
 		return (NULL);
 	if (path->len - paths->len > num_of_ants_in_start)
@@ -50,7 +50,7 @@ t_links *choose_path(t_paths *paths, int num_of_ants_in_start)
 	return (path->path);
 }
 
-void	next_step(t_ant *ant, t_paths *paths)
+void		next_step(t_ant *ant, t_paths *paths)
 {
 	if (!ant->path)
 		ant->path = choose_path(paths, ant->room->num_of_ants);
@@ -65,11 +65,11 @@ void	next_step(t_ant *ant, t_paths *paths)
 	}
 }
 
-t_queue *create_ants_queue(t_room *start)
+t_queue		*create_ants_queue(t_room *start)
 {
 	t_queue	*queue;
 	int		name;
-	
+
 	name = 1;
 	queue = q_new(new_ant(name++, start));
 	while (name <= start->num_of_ants)
@@ -77,12 +77,13 @@ t_queue *create_ants_queue(t_room *start)
 	return (queue);
 }
 
-void	go(t_room *start, t_paths *paths)
+void		go(t_room *start, t_paths *paths)
 {
 	t_queue	*queue;
 	t_ant	*ant;
-	t_ant	*tmp = NULL;
+	t_ant	*tmp;
 
+	tmp = NULL;
 	queue = create_ants_queue(start);
 	while ((ant = (t_ant*)q_get(&queue)))
 	{

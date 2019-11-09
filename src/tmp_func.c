@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tmp_func.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nikgrape <nikgrape@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vinograd <vinograd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 11:49:15 by nikgrape          #+#    #+#             */
-/*   Updated: 2019/11/07 00:03:42 by nikgrape         ###   ########.fr       */
+/*   Updated: 2019/11/08 15:54:13 by vinograd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,21 @@ t_room		*find_room(t_room *head, char *name)
 	return (head);
 }
 
-void	print_rooms(t_room *head)
+void		print_rooms(t_room *head)
 {
-	int i;
-	t_links *tmp;
+	int		i;
+	t_links	*tmp;
 
-	while(head)
+	while (head)
 	{
-		ft_printf("room - %s ant:%d: ants#%d path:%d  ", head->room_name, head->ant_name, head->num_of_ants, head->path_num);
+		ft_printf("room - %s ant:%d: ants#%d path:%d  ",\
+		head->room_name, head->ant_name, head->num_of_ants, head->path_num);
 		tmp = head->links;
 		i = 1;
 		while (tmp)
 		{
-			ft_printf("%s%s-->", (i ? "links: " : ""), ((t_room*)(tmp->data))->room_name);
+			ft_printf("%s%s-->", (i ? "links: " : ""),\
+			((t_room*)(tmp->data))->room_name);
 			i = 0;
 			tmp = tmp->next;
 		}
@@ -40,10 +42,11 @@ void	print_rooms(t_room *head)
 	}
 }
 
-void	print_path(t_links *path)
+void		print_path(t_links *path)
 {
-	char *arrow = "";
-	
+	char *arrow;
+
+	arrow = "";
 	ft_printf("%s", path ? "\nshortest path:  " : "no path");
 	while (path)
 	{
@@ -54,10 +57,11 @@ void	print_path(t_links *path)
 	ft_printf("\n");
 }
 
-void	rev_print_path(t_links *path)
+void		rev_print_path(t_links *path)
 {
-	char *arrow = "";
-	
+	char *arrow;
+
+	arrow = "";
 	ft_printf("%s", path ? "\nshortest path:  " : "no path");
 	while (path->next)
 		path = path->next;
@@ -70,7 +74,7 @@ void	rev_print_path(t_links *path)
 	ft_printf("\n");
 }
 
-void	print_all_paths(t_paths *paths)
+void		print_all_paths(t_paths *paths)
 {
 	while (paths)
 	{
