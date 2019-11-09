@@ -6,7 +6,7 @@
 /*   By: vinograd <vinograd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 16:12:11 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/08 16:11:39 by vinograd         ###   ########.fr       */
+/*   Updated: 2019/11/08 21:08:26 by vinograd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,16 @@
 # include "../queue/queue.h"
 # include "../libft/libft.h"
 
-# define FD 3
+# define FD 0
 
-typedef struct		l_links
+typedef struct		s_links
 {
 	void			*data;
-	struct l_links	*next;
-	struct l_links	*back;
+	struct s_links	*next;
+	struct s_links	*back;
 }					t_links;
 
-
-typedef struct		l_room
+typedef struct		s_room
 {
 	char			*room_name;
 	int				path_num;
@@ -34,22 +33,22 @@ typedef struct		l_room
 	int				is_end;
 	int				num_of_ants;
 	int				ant_name;
-	struct l_room	*next;
-	struct l_room	*parent;
+	struct s_room	*next;
+	struct s_room	*parent;
 	int				x;
 	int				y;
-	struct l_links	*links;
+	t_links			*links;
 }					t_room;
 
-typedef struct		l_paths
+typedef struct		s_paths
 {
-	t_links 		*path;
+	t_links			*path;
 	int				num;
 	int				len;
-	struct l_paths	*next;
+	struct s_paths	*next;
 }					t_paths;
 
-typedef struct		l_ant
+typedef struct		s_ant
 {
 	int				name;
 	t_room			*room;
@@ -80,6 +79,7 @@ void				print_path(t_links *path);
 void				print_all_paths(t_paths *paths);
 t_room				*find_room(t_room *head, char *name);
 
+void				clear_links(t_links *links);
 /*
 **					bonus
 */

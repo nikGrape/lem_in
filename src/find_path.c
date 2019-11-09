@@ -6,7 +6,7 @@
 /*   By: vinograd <vinograd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 23:45:38 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/08 15:46:15 by vinograd         ###   ########.fr       */
+/*   Updated: 2019/11/08 17:48:04 by vinograd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ static t_links	*get_path(t_room *end, t_room *start)
 t_links			*find_path(t_room *start)
 {
 	t_room	*tmp;
-	t_links *checked;
+	t_links *checked; //need free
 	t_queue *queue;
 
 	checked = new_link(start);
@@ -105,5 +105,7 @@ t_links			*find_path(t_room *start)
 			return (get_path(tmp, start));
 		add_all(tmp, &queue, checked);
 	}
+	q_del(&queue);
+	clear_links(checked);
 	return (NULL);
 }

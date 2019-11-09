@@ -6,7 +6,7 @@
 /*   By: vinograd <vinograd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 18:11:46 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/08 15:50:33 by vinograd         ###   ########.fr       */
+/*   Updated: 2019/11/08 17:23:46 by vinograd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ static int		start_end(char *line, t_room *new)
 		new->is_start = 1;
 	else if (ft_strstr(line, "##end"))
 		new->is_end = 1;
-	if (new->is_start || new->is_end || ft_strnstr(line, "##", 2))
-		free(line);
 	else
 		return (0);
 	return (1);
@@ -40,16 +38,20 @@ static t_room	*new_room(char *line)
 {
 	t_room	*new;
 	char	**data;
+	char	*new_line;
 
+	new_line = line;
 	new = (t_room*)malloc(sizeof(t_room));
 	set_zero(new);
 	if (start_end(line, new))
-		get_next_line(FD, &line);
-	data = ft_strsplit(line, ' ');
+		get_next_line(FD, &new_line);
+	data = ft_strsplit(new_line, ' ');
 	new->room_name = ft_strdup(data[0]);
 	new->y = ft_atoi(data[1]);
 	new->x = ft_atoi(data[2]);
 	ft_arrayfree(data);
+	if (new_line != line)
+		free(new_line);
 	return (new);
 }
 
@@ -61,6 +63,7 @@ static t_room	*get_rooms(void)
 
 	get_next_line(FD, &line);
 	head = new_room(line);
+	free(line);
 	tmp = head;
 	while (get_next_line(FD, &line))
 	{
@@ -70,8 +73,9 @@ static t_room	*get_rooms(void)
 			break ;
 		tmp->next = new_room(line);
 		tmp = tmp->next;
-		// free(line);
+		free(line);
 	}
+	free(line);
 	read_links(line, head);
 	return (head);
 }
