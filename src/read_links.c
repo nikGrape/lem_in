@@ -6,7 +6,7 @@
 /*   By: vinograd <vinograd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 21:22:26 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/08 15:49:44 by vinograd         ###   ########.fr       */
+/*   Updated: 2019/11/08 23:49:21 by vinograd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,5 @@ void			read_links(char *line, t_room *head)
 		ft_arrayfree(data);
 		free(line);
 	}
+	free(line);
 }

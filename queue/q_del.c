@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   q_del.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: vinograd <vinograd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 20:19:08 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/03 20:22:23 by Nik              ###   ########.fr       */
+/*   Updated: 2019/11/08 23:44:25 by vinograd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	q_del(t_queue **queue)
 		lnext = *queue;
 		while (tmp != NULL)
 		{
-			free(tmp->data);
 			tmp = lnext->next;
 			free(lnext);
 			lnext = tmp;

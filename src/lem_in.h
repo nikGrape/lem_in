@@ -6,7 +6,7 @@
 /*   By: vinograd <vinograd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 16:12:11 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/08 21:08:26 by vinograd         ###   ########.fr       */
+/*   Updated: 2019/11/09 00:08:26 by vinograd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "../queue/queue.h"
 # include "../libft/libft.h"
 
-# define FD 0
+# define FD 3
 
 typedef struct		s_links
 {
@@ -66,11 +66,19 @@ void				print_step(t_ant *ant, t_ant **tmp);
 int					is_comment(char *line);
 int					get_ants_number();
 void				add_ants_to_start(int num, t_room *head);
+/*
+**			queue with checked rooms
+*/
+int					is_checked(t_links *link, t_links *checked);
+void				checked_add(t_links *link, t_links *checked);
+
 t_links				*new_link(void *data);
+t_ant				*new_ant(int name, t_room *start);
+
 t_links				*rev_list(t_links *path);
 
 void				clear(t_paths *paths, t_room *rooms);
-
+void				clear_links(t_links *links);
 /*
 **			temporary functions
 */
@@ -78,8 +86,6 @@ void				print_rooms(t_room *head);
 void				print_path(t_links *path);
 void				print_all_paths(t_paths *paths);
 t_room				*find_room(t_room *head, char *name);
-
-void				clear_links(t_links *links);
 /*
 **					bonus
 */

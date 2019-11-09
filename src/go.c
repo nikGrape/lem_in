@@ -6,27 +6,11 @@
 /*   By: vinograd <vinograd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 01:40:40 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/08 15:53:24 by vinograd         ###   ########.fr       */
+/*   Updated: 2019/11/09 00:03:43 by vinograd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-void		del_ant(t_ant *ant)
-{
-	free(ant);
-}
-
-t_ant		*new_ant(int name, t_room *start)
-{
-	t_ant *new;
-
-	new = (t_ant*)malloc(sizeof(t_ant));
-	new->name = name;
-	new->room = start;
-	new->path = NULL;
-	return (new);
-}
 
 t_paths		*find_free_path(t_paths *paths)
 {
@@ -92,7 +76,7 @@ void		go(t_room *start, t_paths *paths)
 			q_add(&queue, ant);
 		print_step(ant, &tmp);
 		if (ant->room->is_end)
-			del_ant(ant);
+			free(ant);
 	}
 	ft_printf("\n");
 }

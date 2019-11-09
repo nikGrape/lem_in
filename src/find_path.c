@@ -6,34 +6,11 @@
 /*   By: vinograd <vinograd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 23:45:38 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/08 17:48:04 by vinograd         ###   ########.fr       */
+/*   Updated: 2019/11/09 00:08:59 by vinograd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-static int		is_checked(t_links *link, t_links *checked)
-{
-	while (checked)
-	{
-		if (checked->data == link->data)
-			return (1);
-		checked = checked->next;
-	}
-	return (0);
-}
-
-static void		checked_add(t_links *link, t_links *checked)
-{
-	if (!checked)
-	{
-		checked = new_link(link->data);
-		return ;
-	}
-	while (checked->next)
-		checked = checked->next;
-	checked->next = new_link(link->data);
-}
 
 static void		add_all(t_room *tmp, t_queue **queue, t_links *checked)
 {
@@ -93,19 +70,24 @@ static t_links	*get_path(t_room *end, t_room *start)
 
 t_links			*find_path(t_room *start)
 {
+	t_links	*path;
 	t_room	*tmp;
-	t_links *checked; //need free
+	t_links *checked;
 	t_queue *queue;
 
+	path = NULL;
 	checked = new_link(start);
 	queue = q_new(start);
 	while ((tmp = (t_room*)q_get(&queue)))
 	{
 		if (tmp->is_end)
-			return (get_path(tmp, start));
+		{
+			path = get_path(tmp, start);
+			break ;
+		}
 		add_all(tmp, &queue, checked);
 	}
 	q_del(&queue);
 	clear_links(checked);
-	return (NULL);
+	return (path);
 }
