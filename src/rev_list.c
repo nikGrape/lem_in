@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rev_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vinograd <vinograd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 13:42:44 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/08 15:50:50 by vinograd         ###   ########.fr       */
+/*   Updated: 2019/11/09 16:17:24 by Nik              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ t_links		*rev_list(t_links *path)
 {
 	t_links *rev;
 
+	if (!path)
+		return (NULL);
 	while (path->next)
 		path = path->next;
 	rev = path;

@@ -6,43 +6,44 @@
 /*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 20:59:47 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/07 22:24:16 by Nik              ###   ########.fr       */
+/*   Updated: 2019/11/10 01:45:30 by Nik              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "visual.h"
 
-char	*visual_go(t_room *start, t_paths *paths)
+int		check_step(t_visual *data)
 {
-	static t_queue	*queue;
-	static t_ant	*ant;
-	t_ant	*tmp = NULL;
-	char	*end = "";
+	if (!data->tmp)
+		data->tmp = data->ant;
+	if (data->ant->room->is_end && data->tmp == data->ant)
+		data->tmp = NULL;
+	if (data->ant->room->is_end)
+	{
+		data->finished = ft_strattach(data->finished, ft_itoa(data->ant->name), 3);
+		data->finished = ft_stradd(data->finished, ' ');
+		free(data->ant);
+	}
+	return (data->tmp == q_check_next(data->queue));
+}
 
-	if (!queue)
-		queue = create_ants_queue(start);
-	if (ant)
+int		visual_go(t_visual *data)
+{
+	static int		count;
+	int				ret;
+
+	data->tmp = NULL;
+	ret = (data->queue) ? 1 : 0;
+	if (!count)
+		data->queue = create_ants_queue(data->start);
+	while ((data->ant = (t_ant*)q_get(&data->queue)))
 	{
-		if (ant->room->is_end)
-			end = ft_strjoin(end, ft_itoa(ant->name));
-		next_step(ant, paths);
-		if (!ant->room->is_end)
-			q_add(&queue, ant);
+		next_step(data->ant, data->paths);
+		count++;
+		if (!data->ant->room->is_end)
+			q_add(&data->queue, data->ant);
+		if (check_step(data))
+			break;
 	}
-	while ((ant = (t_ant*)q_get(&queue)))
-	{
-		if (ant == tmp)
-			return (end);
-		next_step(ant, paths);
-		if (!ant->room->is_end)
-			q_add(&queue, ant);
-		print_step(ant, &tmp);
-		if (ant->room->is_end)
-		{
-			end = ft_strjoin_free(end, ft_itoa(ant->name), 2);
-			end = ft_strjoin_free(end, " ", 1);
-			free(ant);
-		}
-	}
-	return (end);
+	return (ret);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_all_paths.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vinograd <vinograd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 00:54:55 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/08 15:46:59 by vinograd         ###   ########.fr       */
+/*   Updated: 2019/11/09 16:19:15 by Nik              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ static t_paths	*new_paths_enlem(t_links *data, int num)
 {
 	t_paths *new;
 
+	if (!data)
+		return (NULL);
 	new = (t_paths*)malloc(sizeof(t_paths));
 	new->path = data;
 	new->num = num;

@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   queue.h                                            :+:      :+:    :+:   */
+/*   visual_clear.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/24 17:17:09 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/09 19:18:39 by Nik              ###   ########.fr       */
+/*   Created: 2019/11/09 21:32:44 by Nik               #+#    #+#             */
+/*   Updated: 2019/11/09 21:34:02 by Nik              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef QUEUE_H
-# define QUEUE_H
+#include "visual.h"
 
-# include <stdlib.h>
-
-typedef struct		s_queue
+void	visual_clear(t_visual *data)
 {
-	void			*data;
-	struct s_queue	*next;
-}					t_queue;
-
-t_queue				*q_new(void *data);
-void				*q_get(t_queue **queue);
-void				q_add(t_queue **queue, void *data);
-void				q_del(t_queue **queue);
-void				*q_check_next(t_queue *queue);
-
-#endif
+	free(data->finished);
+	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	clear(data->paths, data->head);
+	free(data);
+	exit(1);
+}

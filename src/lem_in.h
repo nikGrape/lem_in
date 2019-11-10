@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vinograd <vinograd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 16:12:11 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/09 00:08:26 by vinograd         ###   ########.fr       */
+/*   Updated: 2019/11/09 18:14:34 by Nik              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "../queue/queue.h"
 # include "../libft/libft.h"
 
-# define FD 3
+# define FD 0
 
 typedef struct		s_links
 {
@@ -79,15 +79,13 @@ t_links				*rev_list(t_links *path);
 
 void				clear(t_paths *paths, t_room *rooms);
 void				clear_links(t_links *links);
+void				errors(char *msg);
 /*
-**			temporary functions
+**					-more
 */
-void				print_rooms(t_room *head);
-void				print_path(t_links *path);
-void				print_all_paths(t_paths *paths);
-t_room				*find_room(t_room *head, char *name);
+void				more(t_paths *paths, t_room *head);
 /*
-**					bonus
+**					bonus -v
 */
 void				visual(t_room *head, t_room *start, t_paths *paths);
 

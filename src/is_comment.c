@@ -6,7 +6,7 @@
 /*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 21:23:18 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/07 19:55:11 by Nik              ###   ########.fr       */
+/*   Updated: 2019/11/09 16:22:02 by Nik              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,7 @@ int		is_comment(char *line)
 		free(line);
 		return (1);
 	}
+	else if (ft_strlen(line) < 2)
+		errors("Empty line occured!\n");
 	return (0);
 }

@@ -3,129 +3,75 @@
 /*                                                        :::      ::::::::   */
 /*   visual.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vinograd <vinograd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 17:49:08 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/08 16:36:30 by vinograd         ###   ########.fr       */
+/*   Updated: 2019/11/10 01:34:31 by Nik              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "visual.h"
 
-t_room		*g_head;
-t_room		*g_head;
-t_room		*g_start;
-t_paths		*g_paths;
-void		*mlx_ptr;
-void		*win_ptr;
-
-void	set_param(void)
+t_visual *init_data(t_room *head, t_room *start, t_paths *paths)
 {
-	mlx_ptr = mlx_init();
-	win_ptr = mlx_new_window(mlx_ptr, 800, 800, "lem_in");
+	t_visual *data;
+
+	data = (t_visual*)malloc(sizeof(t_visual));
+	data->mlx_ptr = mlx_init();
+	data->win_ptr = mlx_new_window(data->mlx_ptr, 1000, 1000, "lem_in");
+	data->head = head;
+	data->start = start;
+	data->paths = paths;
+	data->finished = ft_strdup("ants finised: ");
+	data->scale = 30;
+	data->shift_x = 20;
+	data->shift_y = 20;
+	data->steps = 1;
+	return (data);
 }
 
-float	fmodule(float i)
+void	set_data(int c, t_visual *data)
 {
-	return (i < 0) ? -i : i;
+	if (c == 24)
+		data->scale += 5;
+	else if (c == 27 && data->scale > 5)
+		data->scale -= 5;
+	else if (c == 126)
+		data->shift_x -= 20;
+	else if (c == 125)
+		data->shift_x += 20;
+	else if (c == 123)
+		data->shift_y -= 20;
+	else if (c == 124)
+		data->shift_y += 20;
+	else if (c == 49)
+		data->steps += visual_go(data);
 }
 
-void	line(float x1, float y1, float x2, float y2, int color)
+int		deal_key(int c, t_visual *data)
 {
-	float	step_x;
-	float	step_y;
-	float	max;
-
-	step_x = x2 - x1;
-	step_y = y2 - y1;
-	max = MAX(fmodule(step_x), fmodule(step_y));
-	step_x /= max;
-	step_y /= max;
-	while ((int)(x1 - x2) || (int)(y1 - y2))
+	if (c == 49 || c == 24 || c == 27 || (c >= 123 && c <= 126))
 	{
-		mlx_pixel_put(mlx_ptr, win_ptr, y1, x1, color);
-		x1 += step_x;
-		y1 += step_y;
-		if (x1 > 800 || y1 > 800 || y1 < 0 || x1 < 0)
-			break ;
+		mlx_clear_window(data->mlx_ptr, data->win_ptr);
+		set_data(c, data);
+		drew_roms(*data);
+		drew_paths(*data);
+		if (data->finished)
+			mlx_string_put(data->mlx_ptr, data->win_ptr, 20, 750, 0x4bf542, data->finished);
+		mlx_string_put(data->mlx_ptr, data->win_ptr, 20, 700, 0x4bf542, ft_strattach("steps: ", ft_itoa(data->steps), 2));
 	}
-}
-
-void	drew_roms(t_room *head)
-{
-	char	*room;
-	t_links	*tmp;
-
-	while (head)
-	{
-		room = ft_strjoin(head->room_name, "[");
-		if (!head->is_end)
-			room = ft_strjoin_free(room, ft_itoa(head->ant_name), 2);
-		else
-		{
-			room = ft_strjoin_free(room, "#", 1);
-			room = ft_strjoin_free(room, ft_itoa(head->num_of_ants), 2);
-		}
-		room = ft_strjoin_free(room, "]", 1);
-		mlx_string_put(mlx_ptr, win_ptr, head->y * 30, head->x * 30, 0xeff542, room);
-		tmp = head->links;
-		while (tmp)
-		{
-			line(head->x * 30, head->y * 30, ((t_room*)tmp->data)->x * 30, ((t_room*)tmp->data)->y * 30, 0xfc0345);
-			tmp = tmp->next;
-		}
-		free(room);
-		head = head->next;
-	}
-}
-
-void	drew_paths(t_paths *paths)
-{
-	t_room	*room1;
-	t_room	*room2;
-	t_links	*path;
-
-	while (paths)
-	{
-		path = paths->path;
-		while (path->next)
-		{
-			room1 = (t_room*)path->data;
-			room2 = (t_room*)path->next->data;
-			line(room1->x * 30, room1->y * 30, room2->x * 30,\
-			room2->y * 30, 0x20f707 + paths->num * 200);
-			path = path->next;
-		}
-		paths = paths->next;
-	}
-}
-
-int		deal_key(int c, void *param)
-{
-	static char	*end;
-	char		*tmp;
-
-	mlx_clear_window(mlx_ptr, win_ptr);
-	tmp = visual_go(g_start, g_paths);
-	if (!end)
-		end = tmp;
-	else
-		end = ft_strjoin(end, tmp);
-	drew_roms(g_head);
-	drew_paths(g_paths);
-	mlx_string_put(mlx_ptr, win_ptr, 20, 750, 0x4bf542, end);
+	else if (c == 53)
+		visual_clear(data);
 	return (0);
 }
 
 void	visual(t_room *head, t_room *start, t_paths *paths)
 {
-	g_head = head;
-	g_paths = paths;
-	g_start = start;
-	set_param();
-
-	drew_roms(g_head);
-	drew_paths(g_paths);
-	mlx_key_hook(win_ptr, deal_key, NULL);
-	mlx_loop(mlx_ptr);
+	t_visual *data;
+	
+	data = init_data(head, start, paths);
+	drew_roms(*data);
+	drew_paths(*data);
+	mlx_key_hook(data->win_ptr, deal_key, data);
+	mlx_loop(data->mlx_ptr);
 }

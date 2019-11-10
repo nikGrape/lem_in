@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_rooms.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vinograd <vinograd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 18:11:46 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/08 23:50:25 by vinograd         ###   ########.fr       */
+/*   Updated: 2019/11/10 01:19:18 by Nik              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,21 @@ static void		set_zero(t_room *new)
 
 static int		start_end(char *line, t_room *new)
 {
+	static int count_start;
+	static int count_end;
+
+	if (!line && !new)
+		return (count_end + count_start);
 	if (ft_strstr(line, "##start"))
 		new->is_start = 1;
 	else if (ft_strstr(line, "##end"))
 		new->is_end = 1;
 	else
 		return (0);
+	count_end += (new->is_end) ? 1 : 0;
+	count_start += (new->is_start) ? 1 : 0;
+	if (count_end > 1 || count_start > 1)
+		errors("Multiple start or end!\n");
 	return (1);
 }
 
@@ -75,8 +84,8 @@ static t_room	*get_rooms(void)
 		tmp = tmp->next;
 		free(line);
 	}
-	free(line);
 	read_links(line, head);
+	free(line);
 	return (head);
 }
 
@@ -85,8 +94,11 @@ t_room			*read_rooms(void)
 	t_room	*new;
 	int		number_of_ants;
 
-	number_of_ants = get_ants_number();
+	if ((number_of_ants = get_ants_number()) == -1)
+		errors("No ants!\n");
 	new = get_rooms();
+	if (start_end(NULL, NULL) != 2)
+		errors("No start or end!\n");
 	add_ants_to_start(number_of_ants, new);
 	return (new);
 }

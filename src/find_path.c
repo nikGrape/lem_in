@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vinograd <vinograd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 23:45:38 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/09 00:08:59 by vinograd         ###   ########.fr       */
+/*   Updated: 2019/11/10 01:23:37 by Nik              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ static void		add_path_num(t_room *room, int num)
 {
 	if (!room->is_end && !room->is_start)
 		room->path_num = num;
+	else
+		room->path_num = 0;
 }
 
 static t_links	*new_path(void *data, int num, t_links *back)
