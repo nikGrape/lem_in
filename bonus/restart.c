@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   restart.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: vinograd <vinograd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 00:11:53 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/11 00:20:50 by Nik              ###   ########.fr       */
+/*   Updated: 2019/11/11 13:37:47 by vinograd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,5 @@ void	restart(t_visual *data)
 	end->num_of_ants = 0;
 	data->count = 0;
 	data->steps = 1;
-	ft_strclr(data->finished + 14); 
+	ft_strclr(data->finished + 14);
 }

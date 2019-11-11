@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: vinograd <vinograd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 16:50:38 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/11 00:35:35 by Nik              ###   ########.fr       */
+/*   Updated: 2019/11/11 13:47:10 by vinograd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,6 @@ int			main(int argc, char **argv)
 	else
 		steps = go(start, paths);
 	if (argc == 2 && ft_strequ(argv[1], "-more"))
-		ft_printf("\n------------------   steps: %3d   -------------------\n", steps);
+		ft_printf("\n---------------   steps: %3d   ----------------\n", steps);
 	clear(paths, head);
 }

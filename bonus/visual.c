@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   visual.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: vinograd <vinograd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 17:49:08 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/11 00:23:11 by Nik              ###   ########.fr       */
+/*   Updated: 2019/11/11 13:40:06 by vinograd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "visual.h"
 
-t_visual *init_data(t_room *head, t_room *start, t_paths *paths)
+t_visual	*init_data(t_room *head, t_room *start, t_paths *paths)
 {
 	t_visual *data;
 
@@ -31,7 +31,7 @@ t_visual *init_data(t_room *head, t_room *start, t_paths *paths)
 	return (data);
 }
 
-void	set_data(int c, t_visual *data)
+void		set_data(int c, t_visual *data)
 {
 	if (c == 24)
 		data->scale += 5;
@@ -51,7 +51,7 @@ void	set_data(int c, t_visual *data)
 		data->steps += visual_go(data);
 }
 
-int		deal_key(int c, t_visual *data)
+int			deal_key(int c, t_visual *data)
 {
 	if (c == 15 || c == 49 || c == 24 || c == 27 || (c >= 123 && c <= 126))
 	{
@@ -60,18 +60,20 @@ int		deal_key(int c, t_visual *data)
 		drew_roms(*data);
 		drew_paths(*data);
 		if (data->finished)
-			mlx_string_put(data->mlx_ptr, data->win_ptr, 20, 750, 0x4bf542, data->finished);
-		mlx_string_put(data->mlx_ptr, data->win_ptr, 20, 700, 0x4bf542, ft_strattach("steps: ", ft_itoa(data->steps), 2));
+			mlx_string_put(data->mlx_ptr, data->win_ptr,\
+			20, 750, 0x4bf542, data->finished);
+		mlx_string_put(data->mlx_ptr, data->win_ptr, 20, 700,\
+		0x4bf542, ft_strattach("steps: ", ft_itoa(data->steps), 2));
 	}
 	else if (c == 53)
 		visual_clear(data);
 	return (0);
 }
 
-void	visual(t_room *head, t_room *start, t_paths *paths)
+void		visual(t_room *head, t_room *start, t_paths *paths)
 {
 	t_visual *data;
-	
+
 	data = init_data(head, start, paths);
 	drew_roms(*data);
 	drew_paths(*data);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: vinograd <vinograd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/09 18:54:59 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/10 01:28:21 by Nik              ###   ########.fr       */
+/*   Updated: 2019/11/11 13:38:01 by vinograd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	line(t_visual data)
 		mlx_pixel_put(data.mlx_ptr, data.win_ptr, data.y1, data.x1, data.color);
 		data.x1 += step_x;
 		data.y1 += step_y;
-		if (data.x1 > 1600 || data.y1 > 1600 || data.y1 < -800 || data.x1 < -800)
+		if (data.x1 > 1600 || data.y1 > 1600\
+		|| data.y1 < -800 || data.x1 < -800)
 			break ;
 	}
 }

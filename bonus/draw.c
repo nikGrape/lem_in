@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: vinograd <vinograd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/09 18:52:42 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/10 00:41:29 by Nik              ###   ########.fr       */
+/*   Updated: 2019/11/11 13:39:14 by vinograd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "visual.h"
-/*
-**	  white, red, green, yellow, blue, magenta, cyan (7)
- */
+
 int			g_colors[] = {
 	0xe9f0ea, 0xe30e31, 0x42ed13, 0xe1e807, 0x1b0cc4, 0x8d0cc4, 0x13ebe7
 };
@@ -62,7 +60,8 @@ void	drew_roms(t_visual data)
 		room_info = make_room_info(data);
 		data.color = (data.head->is_end) ? g_colors[1] : g_colors[3];
 		data.color = (data.head->is_start) ? g_colors[2] : data.color;
-		mlx_string_put(data.mlx_ptr, data.win_ptr, data.y1, data.x1, data.color, room_info);
+		mlx_string_put(data.mlx_ptr, data.win_ptr, data.y1,\
+		data.x1, data.color, room_info);
 		draw_links(data);
 		free(room_info);
 		data.head = data.head->next;
