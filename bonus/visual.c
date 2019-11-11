@@ -6,7 +6,7 @@
 /*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 17:49:08 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/10 20:31:44 by Nik              ###   ########.fr       */
+/*   Updated: 2019/11/11 00:23:11 by Nik              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_visual *init_data(t_room *head, t_room *start, t_paths *paths)
 	data->shift_x = 20;
 	data->shift_y = 20;
 	data->steps = 1;
+	data->count = 0;
 	return (data);
 }
 
@@ -44,13 +45,15 @@ void	set_data(int c, t_visual *data)
 		data->shift_y -= 20;
 	else if (c == 124)
 		data->shift_y += 20;
+	else if (c == 15)
+		restart(data);
 	else if (c == 49)
 		data->steps += visual_go(data);
 }
 
 int		deal_key(int c, t_visual *data)
 {
-	if (c == 49 || c == 24 || c == 27 || (c >= 123 && c <= 126))
+	if (c == 15 || c == 49 || c == 24 || c == 27 || (c >= 123 && c <= 126))
 	{
 		mlx_clear_window(data->mlx_ptr, data->win_ptr);
 		set_data(c, data);

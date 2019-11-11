@@ -6,7 +6,7 @@
 /*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 20:59:47 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/10 01:45:30 by Nik              ###   ########.fr       */
+/*   Updated: 2019/11/11 00:16:57 by Nik              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,16 @@ int		check_step(t_visual *data)
 
 int		visual_go(t_visual *data)
 {
-	static int		count;
 	int				ret;
 
 	data->tmp = NULL;
 	ret = (data->queue) ? 1 : 0;
-	if (!count)
+	if (!data->count)
 		data->queue = create_ants_queue(data->start);
 	while ((data->ant = (t_ant*)q_get(&data->queue)))
 	{
 		next_step(data->ant, data->paths);
-		count++;
+		data->count++;
 		if (!data->ant->room->is_end)
 			q_add(&data->queue, data->ant);
 		if (check_step(data))

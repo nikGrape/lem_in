@@ -6,7 +6,7 @@
 /*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 17:49:53 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/10 01:43:45 by Nik              ###   ########.fr       */
+/*   Updated: 2019/11/11 00:16:39 by Nik              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct
 				t_ant		*tmp;
 				t_ant		*ant;
 				t_queue		*queue;
+				int			count;
 				float		x1;
 				float		y1;
 				float		x2;
@@ -44,6 +45,7 @@ typedef struct
 void		drew_paths(t_visual data);
 void		drew_roms(t_visual data);
 void		line(t_visual data);
+void		restart(t_visual *data);
 void		visual_clear(t_visual *data);
 
 int			visual_go(t_visual *data);
