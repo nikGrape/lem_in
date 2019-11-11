@@ -6,7 +6,7 @@
 /*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 16:12:11 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/09 18:14:34 by Nik              ###   ########.fr       */
+/*   Updated: 2019/11/11 00:32:13 by Nik              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ void				read_links(char *line, t_room *head);
 t_paths				*get_all_paths(t_room *start);
 t_links				*find_path(t_room *start);
 
-void				go(t_room *start, t_paths *paths);
-void				print_step(t_ant *ant, t_ant **tmp);
+int					go(t_room *start, t_paths *paths);
+int					print_step(t_ant *ant, t_ant **tmp);
 
 int					is_comment(char *line);
 int					get_ants_number();

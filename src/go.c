@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   go.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vinograd <vinograd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 01:40:40 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/09 00:03:43 by vinograd         ###   ########.fr       */
+/*   Updated: 2019/11/11 00:57:29 by Nik              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_links		*choose_path(t_paths *paths, int num_of_ants_in_start)
 
 	if (!(path = find_free_path(paths)))
 		return (NULL);
-	if (path->len - paths->len > num_of_ants_in_start)
+	if (path->len - paths->len >= num_of_ants_in_start)
 		return (NULL);
 	return (path->path);
 }
@@ -61,22 +61,25 @@ t_queue		*create_ants_queue(t_room *start)
 	return (queue);
 }
 
-void		go(t_room *start, t_paths *paths)
+int			go(t_room *start, t_paths *paths)
 {
 	t_queue	*queue;
 	t_ant	*ant;
 	t_ant	*tmp;
+	int		steps;
 
 	tmp = NULL;
+	steps = 1;
 	queue = create_ants_queue(start);
 	while ((ant = (t_ant*)q_get(&queue)))
 	{
 		next_step(ant, paths);
 		if (!ant->room->is_end)
 			q_add(&queue, ant);
-		print_step(ant, &tmp);
+		steps += print_step(ant, &tmp);
 		if (ant->room->is_end)
 			free(ant);
 	}
 	ft_printf("\n");
+	return (steps);
 }
