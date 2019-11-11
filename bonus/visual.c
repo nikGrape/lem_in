@@ -6,7 +6,7 @@
 /*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 17:49:08 by Nik               #+#    #+#             */
-/*   Updated: 2019/11/10 01:34:31 by Nik              ###   ########.fr       */
+/*   Updated: 2019/11/10 20:31:44 by Nik              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,6 @@ void	visual(t_room *head, t_room *start, t_paths *paths)
 	data = init_data(head, start, paths);
 	drew_roms(*data);
 	drew_paths(*data);
-	mlx_key_hook(data->win_ptr, deal_key, data);
+	mlx_hook(data->win_ptr, 2, 5, deal_key, data);
 	mlx_loop(data->mlx_ptr);
 }
